@@ -1,0 +1,3 @@
+# những file không up lên khi ta up project lên mạng
+/node_modules
+.env

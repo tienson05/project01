@@ -1,0 +1,16 @@
+extends ../../layouts/defautl.pug
+include ../../mixins/box-head.pug
+
+block main
+  .container.mt-4
+    +box-head("Chi tiết sản phẩm")
+    .row
+      .col-md-4
+        .card
+          img.card-img-top(src=product.image alt=`Hình ảnh của ${product.name}`)
+      .col-md-8
+        .card
+          .card-body
+            h1.card-title #{product.name}
+            h4(class="card-subtitle mb-2 text-muted") Giá: $#{product.priceCents}
+            p.card-text Mô tả: lorem.........

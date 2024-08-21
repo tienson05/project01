@@ -1,0 +1,37 @@
+extends ../../layouts/defautl.pug 
+include ../../mixins/box-head.pug
+block main
+  div(class="main-container")
+    +box-head("Danh sách sản phẩm")
+    div(class="products-grid")
+      each item in products
+        div(class="product-container")
+          div(class="product-image-container")
+            img(
+              class="product-image"
+              src=item.image
+            )
+          a(
+            class="product-name limit-text-to-2-lines"
+            href=`/products/detail/${item.slug}`
+          ) #{item.name}
+          div(class="product-price") $#{item.priceCents}
+          div(class="product-quantity-container")
+            select
+              option(selected value="1") 1
+              option(value="2") 2
+              option(value="3") 3
+              option(value="4") 4
+              option(value="5") 5
+              option(value="6") 6
+              option(value="7") 7
+              option(value="8") 8
+              option(value="9") 9
+              option(value="10") 10
+          div(class="product-spacer")
+          div(class="added-to-cart")
+            img(src="/images/icons/checkmark.png" alt="checkmark")
+          button(
+            class="add-to-cart-button button-primary js-add-to-cart"
+            data-product-id=item.id
+          ) Add to Cart

@@ -1,0 +1,14 @@
+mixin pagination(pagination)
+  nav(aria-label='Page navigation example')
+    ul.pagination
+      if pagination.currentPage > 1
+        li(class="page-item page-link"
+          page=(pagination.currentPage - 1)) Previous
+      - for(let i = 1; i <= pagination.totalPage; i++)
+        div(class="page-item" 
+            class=(pagination.currentPage == i ? "active" : "")
+            page=i)
+          li(class="page-link") #{i}
+      if pagination.currentPage < pagination.totalPage
+        li(class="page-item page-link"
+          page=(pagination.currentPage + 1)) Next

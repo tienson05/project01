@@ -1,0 +1,89 @@
+extends ../../layouts/defautl.pug 
+include ../../mixins/alert.pug
+block main 
+  +alert-error()
+  +alert-success()
+  h1(class="mb-4") Chỉnh sửa sản phẩm
+  form(
+    action=`${prefixAdmin}/products/edit/${product.id}?_method=PATCH`
+    id="form-edit-product"
+    method="POST"
+    enctype="multipart/form-data" 
+  )
+    div(
+      class="form-group"
+      uploads-image
+    )
+      label(for="image") Ảnh
+      input(
+        type="file"
+        class="form-control-file"
+        id="image"
+        name="image"
+        accept="image/*"
+        uploads-image-input
+      )
+      div(class="box-preview")
+        img(
+          src=product.image
+          uploads-image-preview
+          class="image-preview"
+        )
+        //- button(type="button" class="hidden" turnoff-image-preview) x
+    div(class="form-group")
+      label(for="name") Tên sản phẩm
+      input(
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        value=product.name
+        required
+      )
+    
+    div(class="form-group")
+      label(for="priceCents") Giá
+      input(
+        type="number"
+        class="form-control"
+        id="priceCents"
+        name="priceCents"
+        value=product.priceCents
+        min="0"
+      )
+    div(class="form-group")
+      label(for="position") Vị trí
+      input(
+        type="number"
+        class="form-control"
+        id="position"
+        name="position"
+        placeholder="Tự động tăng"
+        value=product.position
+        min="1"
+      )
+    div(class="form-group form-check form-check-inline")
+      input(
+        type="radio"
+        class="form-check-input"
+        id="statusActive"
+        name="status"
+        value="active"
+        checked=(product.status == 'active' ? true : false)
+      )
+      label(for="statisActive" class="form-check-label") Hoạt động
+    div(class="form-group form-check form-check-inline")
+      input(
+        type="radio"
+        class="form-check-input"
+        id="statusUnActive"
+        name="status"
+        value="unactive"
+        checked=(product.status == 'unactive' ? true : false)
+      )
+      label(for="statusUnActive" class="form-check-label") Dừng hoạt động 
+    div(class="form-group")
+      button(
+        type="submit"
+        class="btn btn-primary"
+      ) Cập nhật

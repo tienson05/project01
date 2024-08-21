@@ -1,0 +1,86 @@
+extends ../../layouts/defautl.pug 
+include ../../mixins/alert.pug
+block main 
+  +alert-error()
+  h1(class="mb-4") Thêm mới sản phẩm
+  form(
+    action=`${prefixAdmin}/products/create`
+    id="form-create-product"
+    method="POST"
+    enctype="multipart/form-data" 
+  )
+    div(
+      class="form-group"
+      uploads-image
+    )
+      label(for="image") Ảnh
+      input(
+        type="file"
+        class="form-control-file"
+        id="image"
+        name="image"
+        accept="image/*"
+        uploads-image-input
+      )
+      div(class="box-preview")
+        img(
+          src=""
+          uploads-image-preview
+          class="image-preview"
+        )
+        button(type="button" class="hidden" turnoff-image-preview) x
+    div(class="form-group")
+      label(for="name") Tên sản phẩm
+      input(
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        required
+      )
+    
+    div(class="form-group")
+      label(for="priceCents") Giá
+      input(
+        type="number"
+        class="form-control"
+        id="priceCents"
+        name="priceCents"
+        value="0"
+        min="0"
+      )
+    div(class="form-group")
+      label(for="position") Vị trí
+      input(
+        type="number"
+        class="form-control"
+        id="position"
+        name="position"
+        placeholder="Tự động tăng"
+        min="1"
+      )
+    div(class="form-group form-check form-check-inline")
+      input(
+        type="radio"
+        class="form-check-input"
+        id="statusActive"
+        name="status"
+        value="active"
+        checked
+      )
+      label(for="statisActive" class="form-check-label") Hoạt động
+    div(class="form-group form-check form-check-inline")
+      input(
+        type="radio"
+        class="form-check-input"
+        id="statusUnActive"
+        name="status"
+        value="unactive"
+      )
+      label(for="statusUnActive" class="form-check-label") Dừng hoạt động 
+    div(class="form-group")
+      button(
+        type="submit"
+        class="btn btn-primary"
+      ) Tạo mới 
+      

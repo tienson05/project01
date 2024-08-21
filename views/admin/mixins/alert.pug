@@ -1,0 +1,19 @@
+mixin alert-success()
+  - if (messages.success)
+    div(
+      class="alert alert-success style-alert"
+      data-time="5000"
+    )
+      span= messages.success
+      button(class="turnoff-alert") X
+
+mixin alert-error()
+  - if (messages.error)
+    div(
+      class="alert alert-danger style-alert"
+      data-time="5000"
+    )
+      span= messages.error
+      button(class="turnoff-alert") X
+  
+       
