@@ -3,7 +3,7 @@ const infoStatus = require("../../helpers/infostatus")
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination")
 const systemConfig = require('../../config/system')
-const storage = require("../../helpers/storageMulter.js");
+//const storage = require("../../helpers/storageMulter.js");
 
 // [GET] /admin/products
 module.exports.productsAdmin = async (req, res) => {
@@ -25,13 +25,18 @@ module.exports.productsAdmin = async (req, res) => {
     currentPage: 1,
     limitItems: 4
   }, req.query, countProducts)
-
+// Sắp xếp
+  let sort = {}
+  if(req.query.sortKey && req.query.sortValue) {
+    sort[req.query.sortKey] = req.query.sortValue
+  } else {
+    sort.position = "desc"
+  }
+  
   const products = await Product.find(find)
-    .sort({position: "desc"})
+    .sort(sort)
     .limit(objectPagination.limitItems)
     .skip(objectPagination.skipItems)
-
-
 
   products.forEach((item) => {
     item.priceCents /= 100;

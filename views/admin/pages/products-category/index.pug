@@ -1,13 +1,13 @@
-extends ../../layouts/defautl.pug
+extends ../../layouts/defautl.pug 
 include ../../mixins/infostatus.pug
 include ../../mixins/search.pug
 include ../../mixins/pagination.pug
-include ../../mixins/form-change-multi.pug
+include ../../mixins/form-change-multi-category.pug
 include ../../mixins/alert.pug
-include ../../mixins/sort.pug
+include ../../mixins/sort-category.pug
 
-block main 
-  h1 Danh sách sản phẩm 
+block main
+  h1 Danh mục sản phẩm
   +alert-success()
   .card.mb-3 
     .card-header Bộ lọc và Tìm kiếm
@@ -24,16 +24,17 @@ block main
         .col-4 
           +sort()
   .card.mb-3 
-    .card-header Danh sách sản phẩm  
+    .card-header Danh mục
     .card-body 
       .row 
         .col-8
           +form-change-multi()
         .col-4 
           a(
-            href=`${prefixAdmin}/products/create`
+            href=`${prefixAdmin}/products-category/create`
             class="btn btn-outline-success"
           ) + Thêm mới
+
       table.table.table-hover.table-sm 
         thead 
           tr 
@@ -42,16 +43,15 @@ block main
             th STT 
             th Hình ảnh
             th Tiều đề
-            th Giá
             th Vị trí
             th Trạng thái
             th Hành động
         tbody
-          each item, index in products
+          each item, index in records
             tr
               td 
                 input(type="checkbox" name="id" value=item.id)
-              td #{pagination.skipItems + index + 1}
+              td #{index + 1}
               td
                 img(
                   src=item.image
@@ -60,7 +60,6 @@ block main
                   height="auto"
                 )
               td #{item.name}
-              td $#{item.priceCents}
               td 
                 input(
                   type="number"
@@ -88,11 +87,11 @@ block main
                   ) Ngừng hoạt động
               td
                 a(
-                  href=`${prefixAdmin}/products/detail/${item.id}`
+                  href=`${prefixAdmin}/products-category/detail/${item.id}`
                   class="btn btn-secondary btn-sm"
                 ) Chi tiết
                 a(
-                  href=`${prefixAdmin}/products/edit/${item.id}`
+                  href=`${prefixAdmin}/products-category/edit/${item.id}`
                   class="btn btn-warning btn-sm"
                 ) Sửa
                 button(
@@ -100,18 +99,16 @@ block main
                   delete-button 
                   data-id=item.id
                 ) Xóa
-  +pagination(pagination)
-
   form(
     action=""
     method="POST"
-    path=`${prefixAdmin}/products/change-status`
+    path=`${prefixAdmin}/products-category/change-status`
     id="form-change-status"
   ) 
   form(
     action=""
     method="POST"
-    path=`${prefixAdmin}/products/delete`
+    path=`${prefixAdmin}/products-category/delete`
     id="form-delete"
   ) 
-  script(src="/admin/js/product.js")
+  script(src="/admin/js/products-category.js")

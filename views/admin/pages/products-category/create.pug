@@ -1,11 +1,9 @@
 extends ../../layouts/defautl.pug 
-include ../../mixins/alert.pug
-block main 
-  +alert-error()
-  h1(class="mb-4") Thêm mới sản phẩm
+
+block main
+  h1(class="mb-4") Thêm mới danh mục
   form(
-    action=`${prefixAdmin}/products/create`
-    id="form-create-product"
+    action=`${prefixAdmin}/products-category/create`
     method="POST"
     enctype="multipart/form-data" 
   )
@@ -30,27 +28,27 @@ block main
         )
         button(type="button" class="hidden" turnoff-image-preview) x
     div(class="form-group")
-      label(for="name") Tên sản phẩm
+      label(for="name") Tên danh mục
       input(
         type="text"
         class="form-control"
         id="name"
-        name="name"
+        name="name" 
         required
       )
+      //- tên của thuộc tính name sẽ được lưu vào req.body.name khi ta gửi form
+    div(class="form-group")
+      label(for="name") Danh mục cha
+      input(
+        type="text"
+        class="form-control"
+        id="parent_id"
+        name="parent_id" 
+      )
+      //- trong req.body sẽ có thuộc tính parent_id
     div(class="form-group")
       label(for="desc") Mô tả
-      textarea(name="message" rows="4" cols="50")
-    div(class="form-group")
-      label(for="priceCents") Giá
-      input(
-        type="number"
-        class="form-control"
-        id="priceCents"
-        name="priceCents"
-        value="0"
-        min="0"
-      )
+      textarea(name="description" rows="4" cols="50")
     div(class="form-group")
       label(for="position") Vị trí
       input(
@@ -84,5 +82,4 @@ block main
       button(
         type="submit"
         class="btn btn-primary"
-      ) Tạo mới 
-      
+      ) Tạo mới

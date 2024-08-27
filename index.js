@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')//thêm vào khi dùng tinyCME
 const route = require("./routes/client/index-route")
 const routeAdmin = require("./routes/admin/index-route")
 const database = require('./config/database.js')
@@ -26,6 +27,10 @@ app.set('views', `${__dirname}/views`);//thêm dirname để chạy được tr�
 app.set('view engine', 'pug');
 
 app.use(express.static(`${__dirname}/public`)); //dùng file tĩnh như trong folder public, thêm dirname để chạy online
+
+//tinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+//End tiniMCE
 
 // App local varibles
 app.locals.prefixAdmin = systemConfig.prefixAdmin
