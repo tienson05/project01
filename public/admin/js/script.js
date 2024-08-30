@@ -55,42 +55,42 @@ if(submitChangeStatus) {
   const checkAll = document.querySelector('[name="checkall"]')
   const inputId = document.querySelectorAll('[name="id"]')
   let arrId = []
-  if(checkAll) {
-    checkAll.addEventListener('click', () => {
-      arrId = []
-      if(checkAll.checked) {
-        inputId.forEach(item => {
-          item.checked = true
-          arrId.push(item.value)
-        })
+  let countProduct = 0;
+  inputId.forEach(item => {
+    countProduct += 1;
+  })
+  checkAll.addEventListener('click', () => {
+    arrId = []
+    if(checkAll.checked) {
+      inputId.forEach(item => {
+        item.checked = true
+        arrId.push(item.value)
+      })
+    } else {
+      inputId.forEach(item => {
+        item.checked = false
+      })
+    }
+  })
+  inputId.forEach(item => {
+    item.addEventListener("click", () => {
+      if(item.checked) {
+        arrId.push(item.value)
       } else {
-        inputId.forEach(item => {
-          item.checked = false
-        })
+        arrId = arrId.filter(i => i !== item.value)
+      }
+
+      let countChecked = 0;
+      inputId.forEach(i => {
+        countChecked += i.checked == true ? 1 : 0 
+      })
+      if(countChecked === countProduct) {
+        checkAll.checked = true
+      } else {
+        checkAll.checked = false
       }
     })
-  }
-  
-  if(inputId) {
-    inputId.forEach(item => {
-      item.addEventListener("click", () => {
-        if(item.checked) {
-          arrId.push(item.value)
-        } else {
-          arrId = arrId.filter(i => i !== item.value)
-        }
-        let countChecked = 0;
-        inputId.forEach(i => {
-          countChecked += i.checked == true ? 1 : 0 
-        })
-        if(countChecked === 4) {
-          checkAll.checked = true
-        } else {
-          checkAll.checked = false
-        }
-      })
-    })
-  }
+  })
   
   submitChangeStatus.addEventListener("submit", (e) => {
     if(arrId.length !== 0) {
@@ -157,5 +157,40 @@ if(uploadsImage) {
     }
   })
 }
-
 //End preview image before it is uploads
+
+// Sort
+const sort = document.querySelector("[sort]")
+if(sort) {
+  let url = new URL(window.location.href)
+  const sortSelect = document.querySelector("[sort-select]")
+  const sortClear = document.querySelector("[sort-clear]")
+
+  // Sắp xếp
+  sortSelect.addEventListener("change", (e) => {
+    const value = e.target.value
+    if(value) {
+      const [sortKey, sortValue] = value.split("-")
+      url.searchParams.set('sortKey', sortKey)
+      url.searchParams.set('sortValue', sortValue)
+    }
+    window.location.href = url.href
+  })
+
+  // Xóa sắp xếp
+  sortClear.addEventListener("click", () => {
+    url.searchParams.delete('sortValue')
+    url.searchParams.delete('sortKey')
+    window.location.href = url.href
+  })
+
+  // Thêm selected
+  const sortKey = url.searchParams.get('sortKey')
+  const sortValue = url.searchParams.get('sortValue')
+  if(sortKey && sortValue) {
+    const stringOption = `${sortKey}-${sortValue}`
+    const selectedOption = sortSelect.querySelector(`option[value='${stringOption}']`)
+    selectedOption.selected = true
+  }
+}
+// End sort

@@ -26,4 +26,4 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model('product', productSchema, 'products')
 
-module.exports = Product;   
+module.exports = Product

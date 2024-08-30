@@ -40,7 +40,9 @@ block main
         value=product.name
         required
       )
-    
+    div(class="form-group")
+      label(for="desc") Mô tả
+      textarea(name="message" rows="4" cols="50")
     div(class="form-group")
       label(for="priceCents") Giá
       input(
