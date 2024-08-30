@@ -1,5 +1,5 @@
 extends ../../layouts/defautl.pug 
-
+include ../../mixins/select-parent.pug
 block main
   h1(class="mb-4") Thêm mới danh mục
   form(
@@ -38,13 +38,15 @@ block main
       )
       //- tên của thuộc tính name sẽ được lưu vào req.body.name khi ta gửi form
     div(class="form-group")
-      label(for="name") Danh mục cha
-      input(
-        type="text"
-        class="form-control"
+      label(for="parent_id") Danh mục cha
+      select(
+        name="parent_id"
         id="parent_id"
-        name="parent_id" 
-      )
+        class="form-control"
+      ) 
+        option(value="") -- Chọn danh mục cha --
+        if(category)
+          +select-parent(category)
       //- trong req.body sẽ có thuộc tính parent_id
     div(class="form-group")
       label(for="desc") Mô tả
