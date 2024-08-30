@@ -41,8 +41,8 @@ block main
         required
       )
     div(class="form-group")
-      label(for="desc") Mô tả
-      textarea(name="message" rows="4" cols="50")
+      label(for="description") Mô tả
+      textarea(name="description" rows="4" cols="50") #{product.description} 
     div(class="form-group")
       label(for="priceCents") Giá
       input(

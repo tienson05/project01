@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  description: String,
   slug: { 
     type: String, 
     slug: "name", //lấy tên sản phẩm làm slug
