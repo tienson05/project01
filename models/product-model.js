@@ -12,6 +12,10 @@ const productSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  product_category_id: {
+    type: String,
+    default: ""
+  },
   description: String,
   slug: { 
     type: String, 

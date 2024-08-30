@@ -1,13 +1,12 @@
 extends ../../layouts/defautl.pug 
-include ../../mixins/alert.pug
 include ../../mixins/select-parent.pug
-block main 
-  +alert-error()
+include ../../mixins/alert.pug
+block main
   +alert-success()
-  h1(class="mb-4") Chỉnh sửa sản phẩm
+  +alert-error()
+  h1(class="mb-4") Chỉnh sửa danh mục
   form(
-    action=`${prefixAdmin}/products/edit/${product.id}?_method=PATCH`
-    id="form-edit-product"
+    action=`${prefixAdmin}/products-category/edit/${record.id}?_method=PATCH`
     method="POST"
     enctype="multipart/form-data" 
   )
@@ -26,44 +25,36 @@ block main
       )
       div(class="box-preview")
         img(
-          src=product.image
+          src=record.image
           uploads-image-preview
           class="image-preview"
         )
-        //- button(type="button" class="hidden" turnoff-image-preview) x
+        button(type="button" class="hidden" turnoff-image-preview) x
     div(class="form-group")
-      label(for="name") Tên sản phẩm
+      label(for="name") Tên danh mục
       input(
         type="text"
         class="form-control"
         id="name"
-        name="name"
-        value=product.name
+        name="name" 
+        value=record.name
         required
       )
+      //- tên của thuộc tính name sẽ được lưu vào req.body.name khi ta gửi form
     div(class="form-group")
-      label(for="product_category_id") Danh mục cha
+      label(for="parent_id") Danh mục cha
       select(
-        name="product_category_id"
-        id="product_category_id"
+        name="parent_id"
+        id="parent_id"
         class="form-control"
       ) 
         option(value="") -- Chọn danh mục cha --
         if(category)
-          +select-parent(category, 1, product.product_category_id)
+          +select-parent(category, 1, record.parent_id)
+      //- trong req.body sẽ có thuộc tính parent_id
     div(class="form-group")
-      label(for="description") Mô tả
-      textarea(name="description" rows="4" cols="50") #{product.description} 
-    div(class="form-group")
-      label(for="priceCents") Giá (Tính bằng Cents)
-      input(
-        type="number"
-        class="form-control"
-        id="priceCents"
-        name="priceCents"
-        value=product.priceCents
-        min="0"
-      )
+      label(for="desc") Mô tả
+      textarea(name="description" rows="4" cols="50") #{record.description}
     div(class="form-group")
       label(for="position") Vị trí
       input(
@@ -72,8 +63,8 @@ block main
         id="position"
         name="position"
         placeholder="Tự động tăng"
-        value=product.position
         min="1"
+        value=record.position
       )
     div(class="form-group form-check form-check-inline")
       input(
@@ -82,7 +73,7 @@ block main
         id="statusActive"
         name="status"
         value="active"
-        checked=(product.status == 'active' ? true : false)
+        checked=(record.status == "active" ? true : false)
       )
       label(for="statisActive" class="form-check-label") Hoạt động
     div(class="form-group form-check form-check-inline")
@@ -92,7 +83,7 @@ block main
         id="statusUnActive"
         name="status"
         value="unactive"
-        checked=(product.status == 'unactive' ? true : false)
+        checked=(record.status == "unactive" ? true : false)
       )
       label(for="statusUnActive" class="form-check-label") Dừng hoạt động 
     div(class="form-group")
