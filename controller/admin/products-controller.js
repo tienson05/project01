@@ -1,8 +1,10 @@
 const Product = require('../../models/product-model')
+const ProductCategory = require('../../models/productsCategory-model')
 const infoStatus = require("../../helpers/infostatus")
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination")
 const systemConfig = require('../../config/system')
+const parentTreeHelper = require("../../helpers/parent-tree");
 //const storage = require("../../helpers/storageMulter.js");
 
 // [GET] /admin/products
@@ -108,9 +110,15 @@ module.exports.deleteProduct = async (req, res) => {
 
 // [GET] /admin/products/create
 module.exports.create = async (req, res) => {
+  let find = {
+    deleted: false
+  }
+  const records = await ProductCategory.find(find)
 
+  const newCategory = parentTreeHelper(records)
   res.render("admin/pages/products/create", {
     pageTitle: 'Thêm mới sản phẩm',
+    category: newCategory
   })
 }
 
@@ -142,9 +150,14 @@ module.exports.edit = async (req, res) => {
   }
   try {
     const product = await Product.findOne(find)
+
+    const records = await ProductCategory.find({deleted: false})
+
+    const newCategory = parentTreeHelper(records)
     res.render("admin/pages/products/edit", {
       pageTitle: 'Chỉnh sửa sản phẩm',
-      product: product
+      product: product,
+      category: newCategory
     })
   } catch (error) {
     res.redirect(`${systemConfig.prefixAdmin}/products`)
