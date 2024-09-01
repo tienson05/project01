@@ -1,11 +1,11 @@
-
-/*****************globals*************/
-body {
-  font-family: 'open sans';
-  overflow-x: hidden; }
-
+.container {
+  width: 1000px;
+  height: 300px;
+}
 img {
-  max-width: 100%; }
+  width: 200px;
+  height: auto;
+}
 
 .preview {
   display: -webkit-box;
@@ -50,12 +50,12 @@ img {
             animation-name: opacity;
     -webkit-animation-duration: .3s;
             animation-duration: .3s; }
-
 .card {
   margin-top: 50px;
   background: #eee;
   padding: 3em;
-  line-height: 1.5em; }
+  line-height: 1.5em; 
+}
 
 @media screen and (min-width: 997px) {
   .wrapper {
@@ -161,5 +161,3 @@ img {
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); } }
-
-/*# sourceMappingURL=style.css.map */
