@@ -8,6 +8,10 @@ block main
     .card-body 
       .row 
         .col-6
+          a(
+            href=`${prefixAdmin}/roles/deleted`
+            class="btn btn-outline-danger"
+          ) + Các nhóm quyền đã xóa
         .col-4.text-right
           a(
             href=`${prefixAdmin}/roles/create`
@@ -41,8 +45,16 @@ block main
                   ) Sửa
                   a(
                     class="btn btn-danger btn-sm ml-1"
-                    href=`${prefixAdmin}/roles/delete/${item.id}`
+                    delete-button-role
+                    data-id=item.id
                   ) Xóa 
           else 
             tr 
               td(colspan="4" class="text-center") Chưa có nhóm quyền nào được tạo
+  form(
+    action=""
+    method="POST"
+    path=`${prefixAdmin}/roles/delete`
+    id="form-delete"
+  ) 
+  script(src="/admin/js/role.js")

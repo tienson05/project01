@@ -1,0 +1,30 @@
+extends ../../layouts/defautl.pug
+
+block main
+  h1(class="mb-4") Chi tiết nhóm quyền
+
+  div(class="form-group")
+    label(for="title") Tiêu đề
+    input(
+      type="text"
+      class="form-control"
+      id="title"
+      name="title"
+      value=data.title
+    )
+  div(class="form-group")
+    label(for="desc") Mô tả
+    input(
+      type="text"
+      class="form-control"
+      id="desc"
+      name="description"
+      value=data.description
+    )
+  div(class="form-group")
+    a(
+      href=`${prefixAdmin}/roles/edit/${data.id}`
+      class="btn btn-primary"
+    ) Chỉnh sửa
+
+    
