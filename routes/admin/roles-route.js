@@ -19,4 +19,8 @@ route.delete('/delete/:id', controller.delete);
 route.get('/deleted', controller.Deleted);
 
 route.get('/undo/:id', controller.undo);
+
+route.get('/permissions', controller.permissions);
+
+route.patch('/permissions', controller.permissionsPatch);
 module.exports = route

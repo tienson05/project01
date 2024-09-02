@@ -147,3 +147,18 @@ module.exports.editPatch = async (req, res) => {
     res.redirect('back')
   }
 }
+
+// [DELETE] /admin/products-category/delete/:id
+module.exports.delete = async (req, res) => {
+  req.body.position = parseInt(req.body.position)
+  try {
+    await ProductCategory.updateOne({_id: req.params.id}, {
+      deleted: true,
+      deleteAt: new Date()
+    })
+    req.flash('success', 'Xóa thành công danh mục!!!');
+  } catch (error) {
+    req.flash('error', 'Xóa danh mục thất bại!!!');
+  }
+  res.redirect("back")
+}
