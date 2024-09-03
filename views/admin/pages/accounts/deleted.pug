@@ -1,0 +1,62 @@
+extends ../../layouts/defautl.pug
+include ../../mixins/alert.pug
+
+block main 
+  +alert-success()
+  .card.mb-3 
+    .card-header Danh sách
+    .card-body  
+      table(class="table table-hover table-sm mt-2")
+        thead 
+          tr 
+            th STT 
+            th Hình ảnh
+            th Họ và tên
+            th Nhóm quyền
+            th Số điện thoại
+            th Email
+            th Trạng thái
+            th Hành động
+        tbody
+          if records && records.length > 0
+            each item, index in records
+              tr
+                td #{index + 1}
+                td
+                  img(
+                    src=item.avatar
+                    alt="avatar"
+                    width="100px"
+                    height="auto"
+                  )
+                td #{item.fullName}
+                td #{item.role.title}
+                td #{item.phone}
+                td #{item.email}
+
+                td 
+                  if(item.status == "active")
+                    a(
+                      href="javascript:;" 
+                      class="badge badge-success"
+                      status=item.status 
+                      id=item.id 
+                      button-change-status
+                    ) Hoạt động
+                  else 
+                    a(
+                      href="javascript:;" 
+                      class="badge badge-danger"
+                      status=item.status 
+                      id=item.id 
+                      button-change-status
+                    ) Ngừng hoạt động
+                td
+                  a(
+                    href=`${prefixAdmin}/accounts/undo/${item.id}`
+                    class="btn btn-danger btn-sm ml-1" 
+                  ) Hoàn tác
+          else 
+            tr
+              td(class="text-center" colspan="8")
+                p(class="text-danger") Chưa có tài khoản nào được xóa!
