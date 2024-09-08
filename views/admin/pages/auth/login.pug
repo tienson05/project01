@@ -1,0 +1,29 @@
+extends ../../layouts/auth.pug
+include ../../mixins/alert.pug
+
+block main
+  +alert-error()
+  .login-wrapper
+      .login-box
+        h1  Login
+        p Have an account?
+        form(
+          action=`${prefixAdmin}/auth/login` 
+          method="POST"
+        ) 
+          .input-group
+            input(type="text" name="email" placeholder="Email" required)
+          .input-group
+            input(type="password" name="password" placeholder="Password" required)
+            .toggle-password
+              i(class="fa fa-eye-slash")
+          button(type="submit") SIGN IN
+          .extras
+            label
+              input(type="checkbox")
+              |  Remember Me
+            a(href="#") Forgot Password
+        .social-login
+          p -- Or Sign In With --
+          button.facebook Facebook
+          button.tiktok Tiktok
