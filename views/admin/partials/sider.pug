@@ -1,14 +1,8 @@
-.container-sider 
-  .menu 
-    a(href=`${prefixAdmin}/dashboard`)
-      h2 Tổng quan
-    a(href=`${prefixAdmin}/products-category`)
-      h2 Danh mục sản phẩm
-    a(href=`${prefixAdmin}/products`)
-      h2 Danh sách sản phẩm
-    a(href=`${prefixAdmin}/roles`)
-      h2 Nhóm quyền
-    a(href=`${prefixAdmin}/roles/permissions`)
-      h2 Phân quyền
-    a(href=`${prefixAdmin}/accounts`)
-      h2 Danh sách tài khoản
+.sidebar 
+  ul.menu
+    li: a(href=`${prefixAdmin}/dashboard`) Tổng quan
+    li: a(href=`${prefixAdmin}/products-category`) Danh mục sản phẩm
+    li: a(href=`${prefixAdmin}/products`) Danh sách sản phẩm
+    li: a(href=`${prefixAdmin}/roles`) Nhóm quyền
+    li: a(href=`${prefixAdmin}/roles/permissions`) Phân quyền
+    li: a(href=`${prefixAdmin}/accounts`) Danh sách tài khoản
