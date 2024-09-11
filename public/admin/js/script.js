@@ -194,3 +194,26 @@ if(sort) {
   }
 }
 // End sort
+
+//Show password
+const loginWrapper = document.querySelector(".login-wrapper")
+if(loginWrapper) {
+  const passwordHide = loginWrapper.querySelector(".toggle-password")
+  passwordHide.addEventListener('click', () => {
+    const change = passwordHide.querySelector("[change]")
+    const changed = change.getAttribute("change")
+    const showPassword = loginWrapper.querySelector("[show-password]")
+    if(changed == '0') {
+      change.classList.remove("fa-eye-slash");
+      change.classList.add("fa-eye")
+      change.setAttribute("change", "1")
+      showPassword.type = 'text'
+    } else {
+      change.classList.remove("fa-eye");
+      change.classList.add("fa-eye-slash")
+      change.setAttribute("change", "0")
+      showPassword.type = 'password'
+    }
+  })
+}
+//End show password
