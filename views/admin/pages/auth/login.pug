@@ -14,9 +14,9 @@ block main
           .input-group
             input(type="text" name="email" placeholder="Email" required)
           .input-group
-            input(type="password" name="password" placeholder="Password" required)
+            input(type="password" name="password" placeholder="Password" show-password required)
             .toggle-password
-              i(class="fa fa-eye-slash")
+              i(class="fa fa-eye-slash" change="0")
           button(type="submit") SIGN IN
           .extras
             label
