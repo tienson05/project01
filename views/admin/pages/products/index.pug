@@ -28,13 +28,15 @@ block main
     .card-body 
       .row 
         .col-8
-          +form-change-multi()
+          if role.permissions.includes("products_edit")
+            +form-change-multi()
         .col-4 
-          a(
-            href=`${prefixAdmin}/products/create`
-            class="btn btn-outline-success"
-          ) + Thêm mới
-      table.table.table-hover.table-sm 
+          if role.permissions.includes("products_create")
+            a(
+              href=`${prefixAdmin}/products/create`
+              class="btn btn-outline-success"
+            ) + Thêm mới
+      table.table.table-hover.table-sm.mt-2 
         thead 
           tr 
             th
@@ -91,15 +93,17 @@ block main
                   href=`${prefixAdmin}/products/detail/${item.id}`
                   class="btn btn-secondary btn-sm"
                 ) Chi tiết
-                a(
-                  href=`${prefixAdmin}/products/edit/${item.id}`
-                  class="btn btn-warning btn-sm"
-                ) Sửa
-                button(
-                  class="btn btn-danger btn-sm ml-1"
-                  delete-button 
-                  data-id=item.id
-                ) Xóa
+                if role.permissions.includes("products_edit")
+                  a(
+                    href=`${prefixAdmin}/products/edit/${item.id}`
+                    class="btn btn-warning btn-sm ml-1"
+                  ) Sửa
+                if role.permissions.includes("products_delete")
+                  button(
+                    class="btn btn-danger btn-sm ml-1"
+                    delete-button 
+                    data-id=item.id
+                  ) Xóa
   +pagination(pagination)
 
   form(
