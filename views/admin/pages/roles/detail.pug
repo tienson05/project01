@@ -21,10 +21,11 @@ block main
       name="description"
       value=data.description
     )
-  div(class="form-group")
-    a(
-      href=`${prefixAdmin}/roles/edit/${data.id}`
-      class="btn btn-primary"
-    ) Chỉnh sửa
+  if role.permissions.includes("roles_edit")
+    div(class="form-group")
+      a(
+        href=`${prefixAdmin}/roles/edit/${data.id}`
+        class="btn btn-primary"
+      ) Chỉnh sửa
 
     

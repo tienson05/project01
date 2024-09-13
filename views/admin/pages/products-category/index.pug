@@ -29,14 +29,16 @@ block main
     .card-body 
       .row 
         .col-8
-          +form-change-multi()
+          if role.permissions.includes("products-category_edit")
+            +form-change-multi()
         .col-4 
-          a(
-            href=`${prefixAdmin}/products-category/create`
-            class="btn btn-outline-success"
-          ) + Thêm mới
+          if role.permissions.includes("products-category_create")
+            a(
+              href=`${prefixAdmin}/products-category/create`
+              class="btn btn-outline-success"
+            ) + Thêm mới
 
-      table.table.table-hover.table-sm 
+      table.table.table-hover.table-sm.mt-3
         thead 
           tr 
             th

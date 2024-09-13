@@ -8,15 +8,17 @@ block main
     .card-body 
       .row 
         .col-6
-          a(
-            href=`${prefixAdmin}/roles/deleted`
-            class="btn btn-outline-danger"
-          ) + Các nhóm quyền đã xóa
+          if role.permissions.includes("permissions-undo")
+            a(
+              href=`${prefixAdmin}/roles/deleted`
+              class="btn btn-outline-danger"
+            ) + Các nhóm quyền đã xóa
         .col-4.text-right
-          a(
-            href=`${prefixAdmin}/roles/create`
-            class="btn btn-outline-success"
-          ) + Thêm mới 
+          if role.permissions.includes("roles_create")
+            a(
+              href=`${prefixAdmin}/roles/create`
+              class="btn btn-outline-success"
+            ) + Thêm mới 
 
       table(
         class="table table-hover table-sm mt-4"
@@ -39,15 +41,17 @@ block main
                     class="btn btn-secondary btn-sm"
                     href=`${prefixAdmin}/roles/detail/${item.id}`
                   ) Chi tiết
-                  a(
-                    class="btn btn-warning btn-sm ml-1"
-                    href=`${prefixAdmin}/roles/edit/${item.id}`
-                  ) Sửa
-                  a(
-                    class="btn btn-danger btn-sm ml-1"
-                    delete-button
-                    data-id=item.id
-                  ) Xóa 
+                  if role.permissions.includes("roles_edit")
+                    a(
+                      class="btn btn-warning btn-sm ml-1"
+                      href=`${prefixAdmin}/roles/edit/${item.id}`
+                    ) Sửa
+                  if role.permissions.includes("roles_delete")
+                    a(
+                      class="btn btn-danger btn-sm ml-1"
+                      delete-button
+                      data-id=item.id
+                    ) Xóa 
           else 
             tr 
               td(colspan="4" class="text-center") Chưa có nhóm quyền nào được tạo

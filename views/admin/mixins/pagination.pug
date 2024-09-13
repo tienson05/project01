@@ -1,6 +1,6 @@
 mixin pagination(pagination)
   nav(aria-label='Page navigation example')
-    ul.pagination
+    ul.pagination.pl-3
       if pagination.currentPage > 1
         li(class="page-item page-link"
           page=(pagination.currentPage - 1)) Previous

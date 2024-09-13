@@ -1,87 +1,88 @@
 extends ../../layouts/defautl.pug 
 include ../../mixins/select-parent.pug
 block main
-  h1(class="mb-4") Thêm mới danh mục
-  form(
-    action=`${prefixAdmin}/products-category/create`
-    method="POST"
-    enctype="multipart/form-data" 
-  )
-    div(
-      class="form-group"
-      uploads-image
+  if role.permissions.includes("products-category_create")
+    h1(class="mb-4") Thêm mới danh mục
+    form(
+      action=`${prefixAdmin}/products-category/create`
+      method="POST"
+      enctype="multipart/form-data" 
     )
-      label(for="image") Ảnh
-      input(
-        type="file"
-        class="form-control-file"
-        id="image"
-        name="image"
-        accept="image/*"
-        uploads-image-input
+      div(
+        class="form-group"
+        uploads-image
       )
-      div(class="box-preview")
-        img(
-          src=""
-          uploads-image-preview
-          class="image-preview"
+        label(for="image") Ảnh
+        input(
+          type="file"
+          class="form-control-file"
+          id="image"
+          name="image"
+          accept="image/*"
+          uploads-image-input
         )
-        button(type="button" class="hidden" turnoff-image-preview) x
-    div(class="form-group")
-      label(for="name") Tên danh mục
-      input(
-        type="text"
-        class="form-control"
-        id="name"
-        name="name" 
-        required
-      )
-      //- tên của thuộc tính name sẽ được lưu vào req.body.name khi ta gửi form
-    div(class="form-group")
-      label(for="parent_id") Danh mục cha
-      select(
-        name="parent_id"
-        id="parent_id"
-        class="form-control"
-      ) 
-        option(value="") -- Chọn danh mục cha --
-        if(category)
-          +select-parent(category)
-      //- trong req.body sẽ có thuộc tính parent_id
-    div(class="form-group")
-      label(for="desc") Mô tả
-      textarea(name="description" rows="4" cols="50")
-    div(class="form-group")
-      label(for="position") Vị trí
-      input(
-        type="number"
-        class="form-control"
-        id="position"
-        name="position"
-        placeholder="Tự động tăng"
-        min="1"
-      )
-    div(class="form-group form-check form-check-inline")
-      input(
-        type="radio"
-        class="form-check-input"
-        id="statusActive"
-        name="status"
-        value="active"
-        checked
-      )
-      label(for="statisActive" class="form-check-label") Hoạt động
-    div(class="form-group form-check form-check-inline")
-      input(
-        type="radio"
-        class="form-check-input"
-        id="statusUnActive"
-        name="status"
-        value="unactive"
-      )
-      label(for="statusUnActive" class="form-check-label") Dừng hoạt động 
-    div(class="form-group")
-      button(
-        type="submit"
-        class="btn btn-primary"
-      ) Tạo mới
+        div(class="box-preview")
+          img(
+            src=""
+            uploads-image-preview
+            class="image-preview"
+          )
+          button(type="button" class="hidden" turnoff-image-preview) x
+      div(class="form-group")
+        label(for="name") Tên danh mục
+        input(
+          type="text"
+          class="form-control"
+          id="name"
+          name="name" 
+          required
+        )
+        //- tên của thuộc tính name sẽ được lưu vào req.body.name khi ta gửi form
+      div(class="form-group")
+        label(for="parent_id") Danh mục cha
+        select(
+          name="parent_id"
+          id="parent_id"
+          class="form-control"
+        ) 
+          option(value="") -- Chọn danh mục cha --
+          if(category)
+            +select-parent(category)
+        //- trong req.body sẽ có thuộc tính parent_id
+      div(class="form-group")
+        label(for="desc") Mô tả
+        textarea(name="description" rows="4" cols="50")
+      div(class="form-group")
+        label(for="position") Vị trí
+        input(
+          type="number"
+          class="form-control"
+          id="position"
+          name="position"
+          placeholder="Tự động tăng"
+          min="1"
+        )
+      div(class="form-group form-check form-check-inline")
+        input(
+          type="radio"
+          class="form-check-input"
+          id="statusActive"
+          name="status"
+          value="active"
+          checked
+        )
+        label(for="statisActive" class="form-check-label") Hoạt động
+      div(class="form-group form-check form-check-inline")
+        input(
+          type="radio"
+          class="form-check-input"
+          id="statusUnActive"
+          name="status"
+          value="unactive"
+        )
+        label(for="statusUnActive" class="form-check-label") Dừng hoạt động 
+      div(class="form-group")
+        button(
+          type="submit"
+          class="btn btn-primary"
+        ) Tạo mới
